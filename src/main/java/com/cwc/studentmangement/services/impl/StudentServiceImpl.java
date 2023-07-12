@@ -52,18 +52,21 @@ public class StudentServiceImpl implements StudentService {
 	public Student updateStudent(int stdId, Student student) {
 		Student studentById = this.studentRepository.findById(stdId)
 				.orElseThrow(() -> new ResourceNotFoundException("Resource not found by given id{}" + stdId));
-
-		studentById.setRollNo(student.getRollNo());
-		studentById.setStdName(student.getStdName());
-		studentById.setSection(student.getSection());
-		studentById.setBranch(student.getBranch());
-		studentById.setStandard(student.getStandard());
-
-//		Student student2 = studentById.builder().rollNo(student.getRollNo()).stdName(student.getStdName()).section(student.getSection())
-//				.branch(student.getBranch()).standard(student.getStandard()).build();
-//		Student updatedStudent = this.studentRepository.save(student2);
-
-		return this.studentRepository.save(studentById);
+		
+		
+		//handle exception
+		Student iExsitingRollNumber = this.studentRepository.findByStudentRollNo(student.getRollNo()).orElse(null);
+		if(iExsitingRollNumber == null) {
+			studentById.setRollNo(student.getRollNo());
+			studentById.setStdName(student.getStdName());
+			studentById.setSection(student.getSection());
+			studentById.setBranch(student.getBranch());
+			studentById.setStandard(student.getStandard());
+			return this.studentRepository.save(studentById);
+		}
+		 throw new DuplicateRollNumberFound("duplicate roll number found");
+		
+		
 	}
 
 	@Override
