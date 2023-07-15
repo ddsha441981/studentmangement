@@ -1,12 +1,19 @@
 package com.cwc.studentmangement.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,17 +27,29 @@ import lombok.Setter;
 @Getter
 @Builder
 @Entity
-@Table(name = "student",schema = "student_database")
+@Table(name = "student", schema = "student_database")
 public class Student {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stdId;
-	
-//	@Column(unique = true,length = 4,nullable = false)
+
+	@Column(name = "roll_number")
+	@NotNull(message = "positive number value is required")
+	@Min(value=1, message="rollnumber: positive number, min 1 is required")
 	private int rollNo;
+	
+	@NotBlank(message = "Enter proper student name")
+	@Size(min = 5, message = "Name should be atleast 5 characters")
+	@Size(max = 12, message = "Name should not be greater than 12 characters")
+	@Column(name = "student_name")
 	private String stdName;
+
 	private String section;
 	private String branch;
+	@Transient
 	private String standard;
+	
+//	@Embedded
+//	private Address address;
 }

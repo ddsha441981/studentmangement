@@ -2,10 +2,6 @@ package com.cwc.studentmangement.utils;
 
 import java.util.UUID;
 
-import org.hibernate.mapping.IdGenerator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 //@Configuration
 public class AutoIdGenerator {
 	
@@ -15,10 +11,6 @@ public class AutoIdGenerator {
 		System.out.println(id);
 		return id;	
 	}
-	
-	public static void main(String[] args) {
-		AutoIdGenerator ag = new AutoIdGenerator();
-		ag.idGenerator();
-	}
+
 
 }

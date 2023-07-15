@@ -1,26 +1,23 @@
 package com.cwc.studentmangement.model;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class SendSMS {
-	
-	@Id
-	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String sms;
+
+//@Entity
+//@Embeddable
+public class Address {
+	private String currentAddress;
+	private String perAddress;
 
 }

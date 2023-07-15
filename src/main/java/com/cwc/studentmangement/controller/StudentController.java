@@ -2,6 +2,7 @@ package com.cwc.studentmangement.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("/")//http://localhost:8089/api/v1/student/
-	public ResponseEntity<Student> saveStudent(@RequestBody Student student){
+	public ResponseEntity<Student> saveStudent(@Valid @RequestBody Student student){
 		Student addedStudent = this.studentService.addStudent(student);
 		return new ResponseEntity<Student>(addedStudent,HttpStatus.CREATED);
 	}
