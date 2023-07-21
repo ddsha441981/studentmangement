@@ -67,7 +67,7 @@ public class Student {
 	private String standard;
 	
 
-	//UniDirectional Mapping
+	//BiDirectional Mapping
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
