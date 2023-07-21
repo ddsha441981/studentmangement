@@ -39,11 +39,14 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student addStudent(Student student) {
 		
+		
 		//Check duplicate roll number
 		Student existingRollNo = this.studentRepository.findByStudentRollNo(student.getRollNo()).orElse(null);
-		 if(existingRollNo == null)
+		 if(existingRollNo == null) {
 		        //RollNumber does not already exist so save the new Roll Number
+			 
 			 return this.studentRepository.save(student);
+		 }
 		 //Duplicate found then, don't add a duplicate and throw exception
 		 throw new DuplicateRollNumberFound("duplicate roll number found");
 	}
