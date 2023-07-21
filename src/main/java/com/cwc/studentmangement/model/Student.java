@@ -55,12 +55,9 @@ public class Student {
 
 	private String section;
 	private String branch;
-//	@Transient
 	private String standard;
 	
 	
-	//private Address address;
-	
-//	@Embedded
-//	private Address address;
+	@Embedded
+	private Address address;
 }

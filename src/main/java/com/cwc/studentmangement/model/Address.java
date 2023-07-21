@@ -1,5 +1,6 @@
 package com.cwc.studentmangement.model;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +18,10 @@ import lombok.ToString;
 @Getter
 @ToString
 
-@Entity
-//@Embeddable
+
+@Embeddable
 public class Address {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int addId;
+
 	private String currentAddress;
 	private String perAddress;
 
