@@ -1,9 +1,13 @@
 package com.cwc.studentmangement.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -11,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumns;
 import javax.persistence.Table;
@@ -61,23 +66,10 @@ public class Student {
 	private String branch;
 	private String standard;
 	
+	//Collection
+	@ElementCollection
+	@JoinTable(name = "address",joinColumns = @JoinColumn(name="student_id"))
+	private Set<Address> homeaddresses = new HashSet<>();
 	
-	@Embedded
-	@AttributeOverrides(value = {
-			@AttributeOverride(column = @Column(name = "home_street",length = 50),name = "street"),
-			@AttributeOverride(column = @Column(name = "home_landmark",length = 50),name = "landmark"),
-			@AttributeOverride(column = @Column(name = "home_city",length = 50),name = "city")
 	
-	})
-
-	private Address homeAddress;
-	
-	@Embedded
-	@AttributeOverrides(value = {
-			@AttributeOverride(column = @Column(name = "office_street",length = 50),name = "street"),
-			@AttributeOverride(column = @Column(name = "office_landmark",length = 50),name = "landmark"),
-			@AttributeOverride(column = @Column(name = "office_city",length = 50),name = "city")
-	
-	})
-	private Address officeAddress;
 }
