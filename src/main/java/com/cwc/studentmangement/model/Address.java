@@ -19,9 +19,13 @@ import lombok.ToString;
 @ToString
 
 
-@Embeddable
+@Entity
 public class Address {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int addId;
+	
 	private String street;
 	private String landmark;
 	private String city;

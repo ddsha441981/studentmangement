@@ -66,10 +66,11 @@ public class Student {
 	private String branch;
 	private String standard;
 	
-	//Collection
-	@ElementCollection
-	@JoinTable(name = "address",joinColumns = @JoinColumn(name="student_id"))
-	private Set<Address> homeaddresses = new HashSet<>();
+
+	//UniDirectional Mapping
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
+	private Address address;
 	
 	
 }
