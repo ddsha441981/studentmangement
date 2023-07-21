@@ -22,7 +22,8 @@ import lombok.ToString;
 @Embeddable
 public class Address {
 
-	private String currentAddress;
-	private String perAddress;
+	private String street;
+	private String landmark;
+	private String city;
 
 }

@@ -1,5 +1,7 @@
 package com.cwc.studentmangement.model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -19,6 +21,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.context.annotation.Primary;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +39,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "student", schema = "student_database")
+@DynamicUpdate
 public class Student {
 
 	@Id
@@ -59,5 +63,21 @@ public class Student {
 	
 	
 	@Embedded
-	private Address address;
+	@AttributeOverrides(value = {
+			@AttributeOverride(column = @Column(name = "home_street",length = 50),name = "street"),
+			@AttributeOverride(column = @Column(name = "home_landmark",length = 50),name = "landmark"),
+			@AttributeOverride(column = @Column(name = "home_city",length = 50),name = "city")
+	
+	})
+
+	private Address homeAddress;
+	
+	@Embedded
+	@AttributeOverrides(value = {
+			@AttributeOverride(column = @Column(name = "office_street",length = 50),name = "street"),
+			@AttributeOverride(column = @Column(name = "office_landmark",length = 50),name = "landmark"),
+			@AttributeOverride(column = @Column(name = "office_city",length = 50),name = "city")
+	
+	})
+	private Address officeAddress;
 }
